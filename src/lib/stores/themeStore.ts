@@ -6,12 +6,21 @@ type Theme = 'light' | 'dark'
 const isBrowser = typeof window !== 'undefined'
 
 function createThemeStore() {
-  // Get initial theme from localStorage or default to 'light'
-  const initialTheme: Theme = isBrowser 
-    ? (localStorage.getItem('theme') as Theme) || 'light'
-    : 'light'
+  // Get initial theme from localStorage with proper validation
+  const getInitialTheme = (): Theme => {
+    if (!isBrowser) return 'light'
+    
+    const storedTheme = localStorage.getItem('theme')
+    // Validate that the stored theme is actually a valid Theme value
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      return storedTheme
+    }
+    return 'light' // Default fallback
+  }
   
-  const { subscribe, set } = writable<Theme>(initialTheme)
+  const initialTheme: Theme = getInitialTheme()
+  
+  const { subscribe, set, update } = writable<Theme>(initialTheme)
   
   // Apply theme to document
   if (isBrowser) {
@@ -21,9 +30,8 @@ function createThemeStore() {
   return {
     subscribe,
     toggle: () => {
-      subscribe(currentTheme => {
+      update(currentTheme => {
         const newTheme: Theme = currentTheme === 'light' ? 'dark' : 'light'
-        set(newTheme)
         
         if (isBrowser) {
           localStorage.setItem('theme', newTheme)
@@ -31,7 +39,7 @@ function createThemeStore() {
         }
         
         return newTheme
-      })()
+      })
     },
     set: (theme: Theme) => {
       set(theme)
