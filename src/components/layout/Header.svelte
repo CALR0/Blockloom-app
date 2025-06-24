@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { themeStore } from './stores/themeStore'
+  import { themeStore } from '../../stores'
   
   function toggleTheme() {
     themeStore.toggle()

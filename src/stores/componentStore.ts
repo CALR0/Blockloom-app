@@ -1,12 +1,8 @@
 import { writable } from 'svelte/store'
-
-interface ComponentState {
-  html: string
-  css: string
-}
+import type { ComponentState } from '../types'
 
 function createComponentStore() {
-  const { subscribe, set, update } = writable<ComponentState>({
+  const { subscribe, set } = writable<ComponentState>({
     html: '',
     css: ''
   })

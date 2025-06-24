@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { componentStore } from './stores/componentStore'
-  import { variantStore } from './stores/variantStore'
+  import { componentStore, variantStore } from '../../stores'
   
   $effect(() => {
     if ($componentStore.html && $componentStore.css) {

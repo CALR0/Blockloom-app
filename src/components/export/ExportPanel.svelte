@@ -1,128 +1,43 @@
 <script lang="ts">
-  import { componentStore } from './stores/componentStore'
-  import { variantStore } from './stores/variantStore'
-  import { tokenStore } from './stores/tokenStore'
-  import { accessibilityStore } from './stores/accessibilityStore'
+  import { componentStore, variantStore, tokenStore, accessibilityStore } from '../../stores'
+  import { ExportService } from '../../services/exportService'
+  import { ClipboardUtils } from '../../utils/clipboard'
+  import { DownloadUtils } from '../../utils/download'
+  import type { ExportFormat } from '../../types'
   
-  let exportFormat = $state('html')
+  let exportFormat: ExportFormat = $state('html')
   let includeTokens = $state(true)
   let includeVariants = $state(true)
   let includeAccessibility = $state(false)
   
   function generateExport() {
-    let exportContent = ''
-    
-    if (exportFormat === 'html') {
-      exportContent = generateHTMLExport()
-    } else if (exportFormat === 'json') {
-      exportContent = generateJSONExport()
-    } else if (exportFormat === 'zip') {
-      // For demo purposes, we'll show what would be in the zip
-      exportContent = generateZipManifest()
-    }
-    
-    return exportContent
-  }
-  
-  function generateHTMLExport() {
-    let html = `<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Component Export</title>
-    <style>
-        /* Base Component Styles */
-        ${$componentStore.css}
-        
-        /* Variant Styles */
-        ${includeVariants ? $variantStore.map(v => v.css).join('\n\n') : ''}
-    </style>
-</head>
-<body>
-    <div class="component-showcase">
-        <h1>Component Showcase</h1>
-        
-        <!-- Base Component -->
-        <section>
-            <h2>Base Component</h2>
-            ${$componentStore.html}
-        </section>
-        
-        ${includeVariants ? `
-        <!-- Variants -->
-        <section>
-            <h2>Variants</h2>
-            ${$variantStore.map(v => `
-            <div class="variant-demo">
-                <h3>${v.name}</h3>
-                ${v.html}
-            </div>
-            `).join('')}
-        </section>
-        ` : ''}
-        
-        ${includeTokens ? `
-        <!-- Design Tokens -->
-        <section>
-            <h2>Design Tokens</h2>
-            <pre><code>${tokenStore.getFormattedTokens('css')}</code></pre>
-        </section>
-        ` : ''}
-    </div>
-</body>
-</html>`
-    
-    return html
-  }
-  
-  function generateJSONExport() {
-    const exportData = {
-      component: {
-        html: $componentStore.html,
-        css: $componentStore.css
-      },
-      variants: includeVariants ? $variantStore : [],
-      tokens: includeTokens ? $tokenStore : [],
-      accessibility: includeAccessibility ? $accessibilityStore : null,
-      metadata: {
-        exportedAt: new Date().toISOString(),
-        version: '1.0.0'
+    return ExportService.generateExport(
+      $componentStore,
+      $variantStore,
+      $tokenStore,
+      $accessibilityStore,
+      exportFormat,
+      {
+        includeTokens,
+        includeVariants,
+        includeAccessibility
       }
+    )
+  }
+  
+  async function copyExport() {
+    try {
+      const content = generateExport()
+      await ClipboardUtils.copy(content)
+    } catch (error) {
+      console.error('Failed to copy export:', error)
     }
-    
-    return JSON.stringify(exportData, null, 2)
-  }
-  
-  function generateZipManifest() {
-    return `Archivo ZIP contendría:
-
-📁 component-export/
-├── 📄 index.html (Componente principal)
-├── 📄 styles.css (Estilos base)
-├── 📄 variants.css (Estilos de variantes)
-├── 📄 tokens.json (Tokens de diseño)
-├── 📄 tokens.scss (Tokens en SCSS)
-├── 📄 accessibility-report.json (Reporte de accesibilidad)
-└── 📄 README.md (Documentación)`
-  }
-  
-  function copyExport() {
-    const content = generateExport()
-    navigator.clipboard.writeText(content)
   }
   
   function downloadExport() {
     const content = generateExport()
-    const blob = new Blob([content], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `component-export.${exportFormat === 'html' ? 'html' : exportFormat === 'json' ? 'json' : 'txt'}`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const extension = exportFormat === 'html' ? 'html' : exportFormat === 'json' ? 'json' : 'txt'
+    DownloadUtils.downloadText(content, `component-export.${extension}`)
   }
 </script>
 

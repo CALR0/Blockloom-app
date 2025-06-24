@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { componentStore } from './stores/componentStore'
-  import { tokenStore } from './stores/tokenStore'
+  import { componentStore, tokenStore } from '../../stores'
+  import { ClipboardUtils } from '../../utils/clipboard'
   
   let exportFormat = $state('json')
   
@@ -10,9 +10,13 @@
     }
   })
   
-  function copyTokens() {
-    const tokens = tokenStore.getFormattedTokens(exportFormat)
-    navigator.clipboard.writeText(tokens)
+  async function copyTokens() {
+    try {
+      const tokens = tokenStore.getFormattedTokens(exportFormat)
+      await ClipboardUtils.copy(tokens)
+    } catch (error) {
+      console.error('Failed to copy tokens:', error)
+    }
   }
   
   function getTokenPreview(token: any) {
