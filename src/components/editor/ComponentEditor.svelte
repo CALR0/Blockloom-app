@@ -23,9 +23,9 @@
 
 <div class="editor-container">
   <div class="editor-header">
-    <h2>Editor de Componente</h2>
+    <h2>Editor de componente</h2>
     <button class="btn btn-secondary" onclick={loadExample}>
-      Cargar Ejemplo
+      Demo
     </button>
   </div>
   
@@ -52,7 +52,7 @@
   </div>
   
   <div class="preview-section">
-    <h3>Vista Previa</h3>
+    <h3>Vista previa</h3>
     <div class="preview-container">
       <div class="preview-frame">
         <style>

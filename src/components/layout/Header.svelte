@@ -35,47 +35,56 @@
   .header {
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
     box-shadow: var(--shadow-sm);
   }
   
   .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: var(--spacing-lg);
+    position: relative;
   }
   
   .logo {
+    text-align: center;
     flex: 1;
   }
   
   .logo h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 800;
     color: var(--color-primary);
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    line-height: 1.2;
+    justify-content: center;
+    gap: var(--spacing-md);
+    line-height: 1.1;
   }
   
   .logo-icon {
-    font-size: 2.2rem;
+    font-size: 3.2rem;
     filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2));
   }
   
   .logo p {
     margin: var(--spacing-sm) 0 0 0;
     color: var(--color-text-muted);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     font-weight: 400;
     line-height: var(--line-height-relaxed);
-    max-width: 500px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .header-actions {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
   }
@@ -156,7 +165,7 @@
   
   @media (max-width: 768px) {
     .header {
-      padding: var(--spacing-lg) 0;
+      padding: var(--spacing-md) 0;
     }
     
     .header-content {
@@ -165,9 +174,32 @@
       gap: var(--spacing-md);
     }
     
+    .header-actions {
+      position: static;
+      transform: none;
+    }
+    
+    .logo h1 {
+      font-size: 2.5rem;
+      justify-content: center;
+    }
+    
+    .logo-icon {
+      font-size: 2.2rem;
+    }
+    
+    .logo p {
+      font-size: var(--font-size-base);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      padding: var(--spacing-sm) 0;
+    }
+    
     .logo h1 {
       font-size: 2rem;
-      justify-content: center;
     }
     
     .logo-icon {
@@ -176,16 +208,6 @@
     
     .logo p {
       font-size: var(--font-size-sm);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .logo h1 {
-      font-size: 1.75rem;
-    }
-    
-    .logo-icon {
-      font-size: 1.6rem;
     }
   }
 </style>

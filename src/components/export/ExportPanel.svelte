@@ -43,8 +43,8 @@
 
 <div class="export-container">
   <div class="export-header">
-    <h2>Exportar Componente</h2>
-    <p class="text-muted">Descarga tu componente con todas sus variantes y tokens</p>
+    <h2>Exportar componente</h2>
+    <p class="text-muted">Descarga tu componente con todas sus variantes y tokens.</p>
   </div>
   
   <div class="export-grid">

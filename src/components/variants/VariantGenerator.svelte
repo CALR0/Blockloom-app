@@ -10,8 +10,8 @@
 
 <div class="variants-container">
   <div class="variants-header">
-    <h2>Variantes Generadas</h2>
-    <p class="text-muted">Visualiza todas las variantes de tu componente automáticamente generadas</p>
+    <h2>Variantes generadas</h2>
+    <p class="text-muted">Visualiza todas las variantes de tu componente automáticamente generadas.</p>
   </div>
   
   {#if $variantStore.length === 0}
