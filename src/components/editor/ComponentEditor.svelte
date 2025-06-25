@@ -1,6 +1,9 @@
 <script lang="ts">
   import { componentStore } from '../../stores'
   import { EXAMPLE_COMPONENT } from '../../constants/examples'
+  import EditorHeader from './EditorHeader.svelte'
+  import CodeEditor from './CodeEditor.svelte'
+  import PreviewPanel from './PreviewPanel.svelte'
   
   let htmlInput = $state('')
   let cssInput = $state('')
@@ -19,66 +22,43 @@
     cssInput = EXAMPLE_COMPONENT.css
     updateComponent()
   }
+  
+  function handleHtmlInput(value: string) {
+    htmlInput = value
+    updateComponent()
+  }
+  
+  function handleCssInput(value: string) {
+    cssInput = value
+    updateComponent()
+  }
 </script>
 
 <div class="editor-container">
-  <div class="editor-header">
-    <h2>Editor de componente</h2>
-    <button class="btn btn-secondary" onclick={loadExample}>
-      Demo
-    </button>
-  </div>
+  <EditorHeader onLoadExample={loadExample} />
   
   <div class="editor-grid">
-    <div class="editor-section">
-      <h3>HTML</h3>
-      <textarea 
-        class="input textarea code-editor"
-        bind:value={htmlInput}
-        oninput={updateComponent}
-        placeholder="Ingresa tu HTML aquí..."
-      ></textarea>
-    </div>
+    <CodeEditor 
+      value={htmlInput}
+      placeholder="Ingresa tu HTML aquí..."
+      label="HTML"
+      onInput={handleHtmlInput}
+    />
     
-    <div class="editor-section">
-      <h3>CSS</h3>
-      <textarea 
-        class="input textarea code-editor"
-        bind:value={cssInput}
-        oninput={updateComponent}
-        placeholder="Ingresa tu CSS aquí..."
-      ></textarea>
-    </div>
+    <CodeEditor 
+      value={cssInput}
+      placeholder="Ingresa tu CSS aquí..."
+      label="CSS"
+      onInput={handleCssInput}
+    />
   </div>
   
-  <div class="preview-section">
-    <h3>Vista previa</h3>
-    <div class="preview-container">
-      <div class="preview-frame">
-        <style>
-          {$componentStore.css}
-        </style>
-        {@html $componentStore.html}
-      </div>
-    </div>
-  </div>
+  <PreviewPanel html={$componentStore.html} css={$componentStore.css} />
 </div>
 
 <style>
   .editor-container {
     max-width: 1200px;
-  }
-  
-  .editor-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-lg);
-  }
-  
-  .editor-header h2 {
-    margin: 0;
-    color: var(--color-text);
   }
   
   .editor-grid {
@@ -88,53 +68,9 @@
     margin-bottom: var(--spacing-xl);
   }
   
-  .editor-section h3 {
-    margin: 0 0 var(--spacing-sm) 0;
-    color: var(--color-text);
-    font-size: var(--font-size-lg);
-  }
-  
-  .code-editor {
-    min-height: 300px;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  .preview-section h3 {
-    margin: 0 0 var(--spacing-md) 0;
-    color: var(--color-text);
-    font-size: var(--font-size-lg);
-  }
-  
-  .preview-container {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .preview-frame {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-md);
-    flex-wrap: wrap;
-  }
-  
   @media (max-width: 768px) {
     .editor-grid {
       grid-template-columns: 1fr;
-    }
-    
-    .editor-header {
-      flex-direction: column;
-      gap: var(--spacing-md);
-      align-items: stretch;
     }
   }
 </style>
