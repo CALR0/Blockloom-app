@@ -80,16 +80,16 @@
       
       <div class="export-actions">
         <button class="btn btn-primary" onclick={downloadExport}>
-          📥 Descargar
+          Descargar
         </button>
         <button class="btn btn-secondary" onclick={copyExport}>
-          📋 Copiar
+          Copiar
         </button>
       </div>
     </div>
     
     <div class="export-preview-card">
-      <h3>Vista Previa</h3>
+      <h3>Vista previa</h3>
       <div class="export-preview">
         <pre class="code-block"><code>{generateExport()}</code></pre>
       </div>
@@ -97,10 +97,10 @@
   </div>
   
   <div class="export-summary">
-    <h3>Resumen de Exportación</h3>
+    <h3>Resumen de exportación</h3>
     <div class="summary-grid">
       <div class="summary-item">
-        <div class="summary-label">Componente Base</div>
+        <div class="summary-label">Componente base</div>
         <div class="summary-value">✓ Incluido</div>
       </div>
       <div class="summary-item">
