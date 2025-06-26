@@ -46,6 +46,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
+    height: fit-content;
   }
   
   .contrast-card h3 {
@@ -87,6 +88,7 @@
   
   .contrast-info {
     flex: 1;
+    min-width: 0;
   }
   
   .contrast-ratio {
@@ -98,5 +100,6 @@
   .contrast-levels {
     display: flex;
     gap: var(--spacing-xs);
+    flex-wrap: wrap;
   }
 </style>

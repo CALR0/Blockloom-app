@@ -24,6 +24,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
+    height: fit-content;
   }
   
   .checks-card h3 {

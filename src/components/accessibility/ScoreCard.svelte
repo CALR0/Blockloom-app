@@ -36,28 +36,38 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
   }
   
   .score-card h3 {
-    margin: 0 0 var(--spacing-md) 0;
+    margin: 0 0 var(--spacing-lg) 0;
     color: var(--color-text);
     font-size: var(--font-size-lg);
+    text-align: center;
   }
   
   .score-display {
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
   }
   
   .score-circle {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-size-2xl);
+    font-size: 2rem;
     font-weight: 700;
-    margin: 0 auto var(--spacing-sm) auto;
+    flex-shrink: 0;
   }
   
   .score-circle.score-success {
@@ -81,5 +91,6 @@
   .score-label {
     font-weight: 600;
     color: var(--color-text);
+    font-size: var(--font-size-lg);
   }
 </style>

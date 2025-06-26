@@ -23,9 +23,15 @@
     </div>
   {:else}
     <div class="accessibility-grid">
-      <ScoreCard score={$accessibilityStore.overallScore} />
-      <ChecksList checks={$accessibilityStore.checks} />
-      <ContrastAnalysis contrastChecks={$accessibilityStore.contrastChecks} />
+      <div class="score-section">
+        <ScoreCard score={$accessibilityStore.overallScore} />
+      </div>
+      <div class="checks-section">
+        <ChecksList checks={$accessibilityStore.checks} />
+      </div>
+      <div class="contrast-section">
+        <ContrastAnalysis contrastChecks={$accessibilityStore.contrastChecks} />
+      </div>
     </div>
   {/if}
 </div>
@@ -52,7 +58,40 @@
   
   .accessibility-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 300px 1fr 300px;
+    grid-template-areas: "score checks contrast";
     gap: var(--spacing-lg);
+    align-items: start;
+  }
+  
+  .score-section {
+    grid-area: score;
+  }
+  
+  .checks-section {
+    grid-area: checks;
+  }
+  
+  .contrast-section {
+    grid-area: contrast;
+  }
+  
+  @media (max-width: 1024px) {
+    .accessibility-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+        "score contrast"
+        "checks checks";
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .accessibility-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "score"
+        "checks"
+        "contrast";
+    }
   }
 </style>
