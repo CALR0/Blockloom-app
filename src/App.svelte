@@ -1,5 +1,6 @@
 <script lang="ts">
   import Header from './components/layout/Header.svelte'
+  import Footer from './components/layout/Footer.svelte'
   import TabNavigation from './components/navigation/TabNavigation.svelte'
   import ComponentEditor from './components/editor/ComponentEditor.svelte'
   import VariantGenerator from './components/variants/VariantGenerator.svelte'
@@ -36,6 +37,8 @@
       </div>
     </div>
   </main>
+  
+  <Footer />
 </div>
 
 <style>
