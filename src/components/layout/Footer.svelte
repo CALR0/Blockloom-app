@@ -31,7 +31,8 @@
     background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-alt) 100%);
     border-top: 1px solid var(--color-border);
     margin-top: auto;
-    padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-2xl) 0 var(--spacing-xl) 0;
     position: relative;
     overflow: hidden;
   }
@@ -140,7 +141,8 @@
   
   @media (max-width: 768px) {
     .footer {
-      padding: var(--spacing-lg) 0 var(--spacing-md) 0;
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
     }
     
     .footer-main {
@@ -162,7 +164,8 @@
   
   @media (max-width: 480px) {
     .footer {
-      padding: var(--spacing-md) 0 var(--spacing-sm) 0;
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg) 0 var(--spacing-md) 0;
     }
     
     .footer-main {
