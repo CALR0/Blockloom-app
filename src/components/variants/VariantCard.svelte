@@ -28,7 +28,7 @@
       class="btn btn-secondary btn-sm"
       onclick={() => onViewCode(variant)}
     >
-      📄 Ver código
+      Ver código
     </button>
   </div>
 </div>
@@ -74,5 +74,13 @@
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-sm);
     min-height: 32px;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-sm:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   }
 </style>

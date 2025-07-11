@@ -19,7 +19,7 @@
 <div class="tokens-container">
   <div class="tokens-header">
     <h2>Tokens de Diseño</h2>
-    <p class="text-muted">Propiedades extraídas automáticamente de tu componente</p>
+    <p class="text-muted">Propiedades extraídas automáticamente de tu componente.</p>
   </div>
   
   {#if $tokenStore.length === 0}

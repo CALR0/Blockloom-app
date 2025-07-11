@@ -14,7 +14,7 @@
 <div class="accessibility-container">
   <div class="accessibility-header">
     <h2>Análisis de Accesibilidad</h2>
-    <p class="text-muted">Evaluación automática basada en WCAG 2.1 AA/AAA</p>
+    <p class="text-muted">Evaluación automática basada en WCAG 2.1 AA/AAA.</p>
   </div>
   
   {#if !$accessibilityStore}
